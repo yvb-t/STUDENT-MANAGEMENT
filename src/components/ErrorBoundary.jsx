@@ -30,7 +30,7 @@ export class ErrorBoundary extends Component {
           onRetry={this.handleReset}
           onReset={() => {
             this.handleReset();
-            window.location.href = '/';
+            window.location.href = import.meta.env.BASE_URL || '/';
           }}
         />
       );

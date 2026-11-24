@@ -11,7 +11,7 @@ function App() {
   return (
     <ErrorBoundary>
       <StudentProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Routes>
             <Route path="/" element={<DashboardLayout />}>
               <Route index element={<Home />} />

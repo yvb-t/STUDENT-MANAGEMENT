@@ -1,4 +1,7 @@
+import { Link, useNavigate } from 'react-router-dom';
+
 export default function NotFound({ hasRetry = false, onRetry, onReset }) {
+  const navigate = useNavigate();
   let locationPath = '/';
   if (typeof window !== 'undefined') {
     locationPath = window.location.pathname || '/';
@@ -17,8 +20,12 @@ export default function NotFound({ hasRetry = false, onRetry, onReset }) {
       console.error('Error clearing reset state:', err);
     }
 
-    if (typeof window !== 'undefined') {
-      window.location.href = '/';
+    try {
+      navigate('/');
+    } catch {
+      if (typeof window !== 'undefined') {
+        window.location.href = import.meta.env.BASE_URL || '/';
+      }
     }
   };
 
@@ -27,7 +34,7 @@ export default function NotFound({ hasRetry = false, onRetry, onReset }) {
       <div className="google-404-container">
         {/* Google Style Colored Logo */}
         <div className="google-logo">
-          <a href="/" onClick={handleGoHome} title="Go to home">
+          <Link to="/" onClick={handleGoHome} title="Go to home">
             <span className="g-blue">E</span>
             <span className="g-red">d</span>
             <span className="g-yellow">u</span>
@@ -36,7 +43,7 @@ export default function NotFound({ hasRetry = false, onRetry, onReset }) {
             <span className="g-red">a</span>
             <span className="g-blue">c</span>
             <span className="g-green">k</span>
-          </a>
+          </Link>
         </div>
 
         <div className="google-404-content">
@@ -69,8 +76,8 @@ export default function NotFound({ hasRetry = false, onRetry, onReset }) {
                 </button>
               )}
 
-              <a
-                href="/students"
+              <Link
+                to="/students"
                 className="google-btn"
                 onClick={() => {
                   if (typeof window !== 'undefined') {
@@ -79,7 +86,7 @@ export default function NotFound({ hasRetry = false, onRetry, onReset }) {
                 }}
               >
                 Student Directory
-              </a>
+              </Link>
             </div>
           </div>
 
